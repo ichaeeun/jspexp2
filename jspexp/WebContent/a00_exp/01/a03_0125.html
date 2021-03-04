@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+[하] 1. 가변인자 물건명,갯수 2개단위  총물건 구매 내역을 출력하세요.
+        buy1("사과",3, "바나나",5,"오렌지",3); 
+            사과  3
+            바나나 5
+            오렌지 3
+            총 11 구맨
+            물건명      	갯수
+            product[0]	product[1]
+            product[2]	product[3]
+            product[4]	product[5]
+            product[6]	product[7]
+            ..
+            index %2  1 일때  1,3,5.....
+                      0 일때  0,2,4.... 
+            
+*/
+	function buy(...product){ // product배열로 가변인자를 입력할 수 있다.
+        console.log("#물건 구매 정보#");
+        console.log("물건정보갯수:"+product.length);
+        console.log("물건명\t갯수");
+       	var tot=0;
+      	product.forEach(function(prod, idx,arry){
+      		// prod 단위 데이터, idx(인덱스번호..)
+      		//console.log(prod+":"+idx);
+      		if(idx%2==0){ // index가 짝수일때..
+      			console.log("물건명:"+prod);
+      		}else{	// index가 홀수일 때.
+      			console.log("갯수:"+prod);
+      			tot+=Number(prod);
+      		}
+      		
+      	});   
+      	console.log("총갯수:"+tot)
+    }	
+    buy("사과",3,"바나나",5,"오렌지",3); 
+    buy("컴퓨터",1); 
+
+/*
+[중] 1. 가변인자를 활용하여  물건명과 가격, 갯수 3개 단위로 입력하게 하여, 총물건 구매 내역을 출력하세요.
+        buy2("수박",3000,2,"컴퓨터",1500000,1)
+            수박 3000 2  6000
+            컴퓨터 1500000 1 1500000
+            총 1506000
+            물건명      	가격			갯수
+            product[0]	product[1]	product[2]
+            product[3]	product[4]	product[5]
+            product[6]	product[7]	product[8] 
+            */
+        	function buy2(...products){ // product배열로 가변인자를 입력할 수 있다.
+                console.log("#물건 구매 정보#");
+                console.log("물건명\t가격\t갯수\계");
+               	var tot=0;
+               	var prn="";
+               	for(var idx=0;idx<products.length;idx++){
+               		
+             		if(idx%3==0){
+             			prn="";
+             			prn+=products[idx]+"\t";
+             			//console.log("물건명:"+products[idx])
+             		}else if(idx%3==1){
+             			prn+=products[idx]+"\t";
+             			var sum = products[idx];
+             			//console.log("가격:"+products[idx]);
+             		}else{
+             			prn+=products[idx]+"\t";
+             			sum = sum*products[idx];
+             			// js에서 자동형변환으로 *(곱셉처리)
+             			tot+=sum;
+             			//console.log("갯수:"+products[idx]);
+             			//console.log("계:"+sum);
+             			prn+=sum+"\t";
+             			console.log(prn);
+             		}
+               	}
+              	console.log("총계:"+tot)
+            }	
+            buy2("사과",2000, 3,"바나나",4000, 5,"오렌지",3000,3); 
+            buy2("컴퓨터",1500000,1);             
+            /*    
+[하] 2. addPlayer()라는 선수등록 함수를 정의하되, 
+		default로 선수명 :입력되지 않음, 소속사:소속상 없음,
+    	성적 : 0으로 처리되게 하세요.
+    */
+    function addPlayer(name="입력되지 않음",team="소속사 없음",record=0){
+    	console.log("# 선수 등록 정보 #");
+    	console.log("이름:"+name);
+    	console.log("소속사:"+team);
+    	console.log("성적:"+record);
+    }
+    addPlayer();
+    addPlayer('최형우');
+    addPlayer('손아섭','롯데');
+    addPlayer('박민우','NC',0.345);
+    /*    
+[중] 3. while()과 prompt()를 이용하여, 물건명과 갯수를 2개단위로 입력하여, 총 3개의 데이터를 아래와 같은 
+    테이블에 출력하되,  두번째 데이터는 반드시 숫자형일 때까지 입력되게 처리하세요.
+    isNaN
+    
+        no   물건명  갯수
+        1    사과    3
+        2    바나나   5
+        3    오렌지   3
+
+    for(var no=1;no<=3;no++){
+		var pname = prompt("물건명 입력","사과");
+	    do{
+	    	var cnt = prompt("갯수입력(갯수는 반드시 숫자형)","0");
+	    }while( isNaN(cnt) );  // cnt가 숫자형이 아닐때.   
+	    console.log("no\t물건명\t갯수");	
+	    console.log(no+"\t"+pname+"\t"+cnt);
+    }
+        */    
+    	
+   
+        /*        
+[하] 4. json형식으로 음악명, 가수, 발매연도로 초기 선언하고, 추가 속성으로 판매량으로 지정하여, 처리하고
+        for in 구문의 통해서 출력하세요. 
+ 
+*/
+	// var 변수명 = {속성:속성값, 속성2:속성2값,....}
+	var music = {title:"Dynamite",singer:"방탄소년단",year:2019};
+    music.buyCnt=300000; // 추가속성과 속성값 설정.
+    // for(var 속성 in 객체/배열명)
+    //        객체[속성] :속성값
+    console.log("음악명\t가수\t발매연도\t판매량");
+    var show="";
+    for(var prop in music){
+    	show+=music[prop]+"\t";
+    }
+    console.log(show);
+//
+
+</script>
+</head>
+<body>
+	<h2></h2>
+</body>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+	document.querySelector("h2").innerHTML="js 시작^^";
+//
+
+</script>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" 
+	src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script type="text/javascript">
+/* 
+# jquery 학습.
+1. javascript 기반의 lib이다.
+	기존 javascript + jquery기능 선택자와 함수.
+2. jquery의 주요 학습 범위
+	1) $("선택자")
+		- css 선택자 처리 형식과 동일
+		- 단일형/배열형으로 한번에 여러가지 내용을 선택하여 처리할 수 있다.
+		- 가상 선택자  ::형식 (이벤트나 기타 기능 포함 선택자)
+	2) $().action()
+		- 기능처리 액션 : 위에 선택자 기준으로 하나에 대한 처리뿐만아니라
+			for문 없이 동일한 여러개의 선택자를 한번에 적용처리해 준다.
+			ex) $("h1").text("안녕하세요") : h1은 모두 안녕하세요
+				출력처리.
+		- 출력
+			.text() : tag가 랜더링되지 않은 단순 문자열 출력 형태의
+				요소객체를 처리할 때, 사용된다.(호출/저장)
+				text("출력내용 표현"), text() :출력내용 호출
+				ex) js textContent, innerText
+			.html() : tag가 랜더링되어 화면에 출력 내지 출력된 tag내용
+				확인시 사용된다.
+				html("태그 출력 표현"), html(): html태그 내용 호출
+				ex) js의 innerHTML
+		- value값
+			.val() : form하위 객체의 요소객체에 대하여, value에 대한
+			저장값을 할당하거나 호출할 때, 사용된다.
+		- 속성
+			.attr() : 일반 지원되는 기본 속성값에 대한 설정을 할 때 사용된다.
+				또는 호출할때 사용왼다.
+				ex) $("h1").attr("align","center"); 속성값 저장
+					$("h1").attr("align") 속성값 호출
+			.css() : css에서 지원하는 속성값을 처리할 수 있다.
+				ex) $("h1").css("background-color","red");
+			- 다중의 속성값 처리
+				json형식으로 여러가지 속성을 한번에 설정할 수 있다.
+				$("선택자").attr/css({속성1:속성값2, 속성2:속성값2...})
+				ex) $("h1").css({color:"yellow",backgroundColor:"red",
+						border:"1px solid green"})
+		- 배열에 대한 선택 처리
+			.eq(index) : 다중의 선택에 대하여 index를 이용해서 선택하져 속성을 
+				지정할 수 있다.
+				ex) $("tr").eq(2).css("text-align","center") 
+				: 3번째 tr에 대하여 정렬을 중앙으로 처리.
+			.start() : 해당 다중의 선택자 중 첫번째 선택
+			.end() : 해당 다중의 선택자 중 마지막 선택
+		- 함수형 처리
+			.each(function(){}) : 다중 선택자에 대한 배열 처리
+			.map(function(){})	: 다중 선택자에 대한 대상 개별 내용 적용
+			.filter(function(){}) : 다중 선택자에 대한 filter 처리..
+		- 이벤트 처리
+			다양한 이벤트 기능 처리.
+			.hovor(함수1,함수2)
+			.click(function(){})
+			.on("이벤트명",function(){})
+			.toggleXXX(기능 처리.)
+		- 다양한 기능 처리.
+			-append() : 추가 기능 처리
+			-wrap() : 요소객체에 대한 감싸는 태그 처리.
+			-기능함수1().기능함수2().. : 기능 action 함수 chain 기능
+	3) $.ajax({속성:속성값, 속성2:속성2값,...}) 
+		jquery에서 js의 ajax처리 확장 형태
+		비동기 처리하는 ajax를 jquery의 속성/속성값 형식으로 간편하게 처리해준다.	
+
+
+
+ 
+ 
+# js 라이브러리 사용하기.
+1. CDN(Content Delivery Network)
+	src="https://code.jquery.com/jquery-3.5.1.js"
+2. lib(jquery-3.5.1.js)를 다운로드 해서 서버에 특정 위치해서 호출해서 사용
+
+ 
+*/
+/*
+1. 기본 코드
+	$(document).ready(함수/익명함수)
+	window.onload=function(){};와 동일한 처리
+	ex) $(document).ready(function(){});
+	
+		function start(){}
+		$(document).ready(start);
+	
+	
+2. $ : jquery 식별자로 사용. 
+	window.jQuery=window.$=jQuery=$
+3. 기본적인 선택자
+	$("선택자").기능메서드();
+	선택자는 css의 선택자(선택자{속성:속성값})
+	기본 형태
+	$("h1").css("color","red");
+	선택자, 메서드
+	전체 선택자  : $(“*”)
+	태그 선택자 : $(“h1, p”)
+	아이디 선택자 : $(“#target”)
+	클래스 선택자 : $(“.item”)
+	$(“.item.select”)
+		ex) <h1 class="item select"
+	ex) 조합 선택자
+		$(".cls01#target01")
+			<h1 class="cls01"
+			<h1 class="cls01" id="target01"
+			<h1 class="cls01"
+		$("h2#id01")
+			<h2
+			<h2 id="id01"
+			<h2
+4. 자손/후손 선택자
+$("부모 > 자손") : 객체 상하위 관계에 있을 때, 바로 위와 바로 밑에 있는 계층 관계에 있는 때,
+				하위 객체를 지정한다.
+$("상위 하위") : 객체 상 하위 관계 있을 때, 하위 객에 깊이에 상관없이,
+				자손 객체가 있기만 하면 해당 자손 객체를 지정한다.
+$(“요소1 + 요소2”) : 전제 조건이 계층레벨에서 같은 레벨. 요소1을 바로 앞세운 요소2 객체 선택한다.
+  ex) $( "label + input" ).css( "color", "blue" ).val( "Labeled!" );
+$(“요소1 ~ 요소2”) : 요소1 이후에 같은 계층의 모든 요소2 선택한다.
+	요소1과 요소2 사이에 다른 요소들이 있어도 적용이되고, 요소2가 여러개 있더라도 다 적용이 된다.
+  ex) $( "#prev ~ div" ).css( "border", "3px groove blue" );
+*/
+	$(document).ready(function(){
+		$("h2").text("jquery 시작");
+		$("*").css("color","red");
+        console.log("첫 번째 div 값:" + $("div")[0].innerHTML );
+	    console.log("두 번째 div 값:" + $("div")[1].innerHTML );	
+	    $("#target").css("color","red");
+	    // .html() : 읽기와 저장 가능 기능메서드 html 코드 랜더링 처리.
+	    // .text() : 읽기와 저장 가능 기능메서드 text 문자 그대로 출력 및 저장
+	    console.log("#target 값:" + $("#target").text() );
+	    $(".myClass").css("color","blue");
+	    // # 같은 여러 요소객체가 있을 때, 위치기반(index)으로 선택하여 원하는 
+	    //   속성으로 속성값을 처리 하거나 출력할 때, 활용된다.
+	    // .first() : 대상객체에 첫번째,
+	    // .last() : 대상객체의 화면에서 마지막객체
+	    // .eq(index) : 대상객체의 index번째 객체
+	    console.log("첫 번째 .myClass 값:" + $(".myClass").first().text() );
+	    console.log("마지막 .myClass 값:" + $(".myClass").last().text() );	
+	    //ex) h3 7개를 출력하고, 짝수번째 class를 cls01, 홀수번째를 class를 cls02로
+	    // 지정하여 해당 label를 짝수/홀수로 표기하고, 글자색상을 orange와 pink로 jquery
+	    // 로 지정하세요.  ~12:40
+	    $(".cls02").text("홀수").css("color","pink");
+	    // $("선택자").기능메서드1().기능메서드2() : 특정 선택자에서
+	    //   여러 기능처리를 하는  chainning을 처리할 수 있다.
+	    $(".cls01").text("짝수");
+	    $(".cls01").css("color","orange");
+	});
+</script>
+</head>
+<body>
+	<h3 class="cls02"></h3>
+	<h3 class="cls01"></h3>
+	<h3 class="cls02"></h3>
+	<h3 class="cls01"></h3>
+	<h3 class="cls02"></h3>
+	<h3 class="cls01"></h3>
+	 <h2></h2>
+	 <div>DIV1</div>
+	 <div>DIV2</div>
+	 <span>SPAN</span>
+	 <div id="target">DIV2</div>	
+	 <div class="notMe">div class="notMe"</div>
+	 <div class="myClass">div class="myClass"</div>
+	 <span class="myClass">span class="myClass"</span>	 
+</body>

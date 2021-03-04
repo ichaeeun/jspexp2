@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# jquery에서 이벤트 처리.
+1. 형식
+	1) $("선택자").이벤트명(function(){ 처리할 내용 });
+	2) $("선택자").on("이벤트명",function(){})
+	   $("선택자").on({"이벤트1":function(){},
+		             "이벤트2":function(){}   
+	   })
+	   
+ 
+*/
+//
+	$(document).ready(function(){
+		
+		var isBanana = true;
+		$("h2").text("이벤트 처리");
+		// $("선택자").on("이벤트명",function(){ 처리할 이벤트 핸들러 함수})
+		$("button").on("click", function(){
+			if( isBanana ){
+				$("img").attr({
+					src:"banana.png", // 다중의 기본 속성값 변경 처리. json형식
+					width:200,
+					height:200
+				});
+				isBanana=false;
+			}else{
+				$("img").attr({
+					src:"puppy03.PNG", // 다중의 기본 속성값 변경 처리. json형식
+					width:100,
+					height:100
+				});				
+				isBanana=true;
+			}
+			console.log( $("img").attr("src"));
+		});
+		// ~14:20
+		// ex) 위 내용에서 click시 클릭에 따라서 이미지가 속성이 변경 되게 처리하세요.
+		//    1번 - 바나나, 2번 강아지  3번 바나나.... ~ 14:25
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<button>이미지 변경</button><br>	
+	<img src="puppy03.PNG" width="100" height="100" />
+	
+</body>

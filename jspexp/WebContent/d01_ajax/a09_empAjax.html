@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	var xhr = new XMLHttpRequest();
+	$(document).ready(function(){
+		/// 화면에 ename, job을 입력시
+		$("[name=ename], [name=job]").keyup(function(){ 
+			if(event.keyCode==13){ // enter키를 입력했을 때.
+				ajaxFun()
+			}
+		});
+	});
+	function ajaxFun(){
+		
+		var enameV = $("[name=ename]").val();
+		var jobV = $("[name=job]").val();
+		var qstr = "ename="+enameV+"&job="+jobV;
+		xhr.open("get","z09_empList.jsp?"+qstr,true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				// z09_empList.jsp에서 전송해오는 결과 html 내용을
+				// 현재 화면의 div에 출력 처리한다.
+				$("div").html(xhr.responseText);				
+			}
+		};
+		xhr.send();		
+	}		
+</script>
+</head>
+<body>
+	<h2>사원정보 ajax</h2>
+	<table>
+		<tr><th>사원명</th><td><input type="text" name="ename"/></td></tr>
+		<tr><th>직책명</th><td><input type="text" name="job"/></td></tr>
+	</table>
+	<div></div>
+</body>

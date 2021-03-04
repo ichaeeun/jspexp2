@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# bind를 통한 이벤트 처리.
+1. $("요소객체").bind("이벤트",function(event){ 핸들러 함수.})
+2. 핸들러 함수의 매개변수를 통한 속성값 전달.
+	event.data.포함한 속성값..
+	$("요소객체").bind("이벤트",이벤트전달데이터json,function(event){
+		event.data.두번째매개변수json데이터
+		// event.data = 두번째 매개변수 데이터
+		// event.data = {속성:속성값...}
+	})
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("bind 이벤트");
+		var message = 'hello';
+		$('#foo').bind('click', {msg: message}, function(event) {
+			$("h3").text("메시지:"+event.data.msg);
+		 	console.log(event.data.msg); // 'hello'; 출력
+		});
+		message = 'world';
+		$('#bar').bind('click', {msg: message}, function(event) {
+			$("h3").text("메시지:"+event.data.msg);
+		  	console.log(event.data.msg); // ‘world' 출력
+		});	
+		$('#apple').bind('click', {name:"사과",price:3000,cnt:5}, 
+				function(event) {
+			// event.data = {name:"사과",price:3000,cnt:5}
+			$("h3").text(event.data.name+":"+event.data.price+":"
+					+event.data.cnt);
+		});			
+		$('#banana').bind('click', {name:"바나나",price:4000,cnt:3}, 
+				function(event) {
+			$("h3").text(event.data.name+":"+event.data.price+":"
+					+event.data.cnt);
+		});					
+	});
+	// ex) 사과버튼, 바나나버튼 으로된 버튼을 만들고, json 형식으로 물건명, 가격, 갯수
+	//     정보를 포함 시키고, 해당 버튼을 클릭시, event 매개변수로 전달하여,
+	//     해당 정보를 하단에 출력 처리하세요. ~ 15:30	
+</script>
+</head>
+<body>
+	<h2></h2>
+	<button id="foo">hello 버튼</button>
+	<button id="bar">world 버튼</button>	
+	<button id="apple">사과 버튼</button>	
+	<button id="banana">바나나 버튼</button>	
+	<h3></h3>
+</body>

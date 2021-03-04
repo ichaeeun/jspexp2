@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# 요청값에 따른 화면 처리..
+1. 서버에 요청값을 기준으로 처리된 데이터를 화면에 
+	바로 처리하는 내용을 해보자.
+	페이지?요청key=요청value
+2. 요청값 : query string 형식
+3. 결과 페이지 
+	1) html파일 호출.(요청값 처리 불가능) 
+		- 저장되어 있는 화면 리턴
+	2) text파일 - 저장되어 있는 파일에 문자열 리턴,
+		json형식의 문자열 리턴
+	3) jsp파일 호출.(요청값/DB로딩 처리 가능)
+		- 필요한 데이터를 json형식으로 로딩
+		- 필요한 화면을 html 태그를 포함하여 표현된 내용을 구성해서 로딩.
+	
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("로그인");
+		$("#btn").click(function(){
+			ajaxFun();
+		});
+	});
+	function ajaxFun(){
+		var xhr = new XMLHttpRequest();
+		var idVal = $("#id").val();
+		var passVal = $("#pass").val();
+		xhr.open("get","z07_request.jsp?id="+idVal+"&pass="+passVal,true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				//alert(xhr.responseText);
+				$("div").html(xhr.responseText);
+				//var prod = eval("("+xhr.responseText+")");
+			}
+		};
+		xhr.send();		
+	}	
+	//ex) 물건명 : [  ] 가격: [   ] 갯수 :[   ] [구매] a08_request.html
+	//      @@@물건 구매비용 @@@원.  z08_data.jsp ~ 14:20
+</script>
+</head>
+<body>
+	<h2></h2>
+	<table>
+		<tr><th>아이디</th><td><input id="id" type="text"/></td></tr>
+		<tr><th>패스워드</th><td><input id="pass" type="password"/></td></tr>
+		<tr><td colspan="2"><input type="button" id="btn" value="로그인"/></td></tr>
+	</table>
+	<div></div>
+</body>

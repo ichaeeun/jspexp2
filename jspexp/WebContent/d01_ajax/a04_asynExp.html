@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+			// ex) a04_asynExp.html 입력데이터:[  ] 키를 입력할 때, 비동기 통신으로
+			//     z04_data.txt에 있는 데이터 로딩하기.. 이벤트 keyup
+			// z04_data.txt 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("입력 비동기 통신");
+		$("[name=data01]").keyup(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","z04_data.txt",true);
+			xhr.onreadystatechange=function(){
+				if(xhr.readyState==4 && xhr.status==200){ // 정상 상황.
+					$("div").text( $("div").text() 
+							+xhr.responseText);				
+				}
+			};
+			xhr.send();					
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	입력데이터:<input type="text" name="data01"/>
+	<div></div>
+</body>

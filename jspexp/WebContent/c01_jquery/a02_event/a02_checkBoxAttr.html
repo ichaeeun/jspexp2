@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# 속성 설정과 이벤트.
+1. $("선택자").removeAttr("속성")
+	: 속성의 삭제.
+2. $("선택자").attr("속성","속성값")
+	: 속성의 설정.
+3. checkbox의 속성 설정 
+   $("선택자").prop("checked", true);
+   $("선택자").prop("checked", false);
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("check box 속성 처리");
+	    $("#allunCheck").on("click",function(){
+	    	//$("input").removeAttr("checked");
+            $("input").prop("checked",false);
+	    });
+	    $("#allCheck").on("click",function(){
+	    	//$("input").attr("checked","checked");
+            $("input").prop("checked",true);	    	
+	    });		
+	});  // ~14:40
+	/*
+	ex) 아래와 같은 화면에서 상단에 선택해제에 따라서 전체 선택/해제가 처리되게 하세요.
+	
+	[]  물건명   가격  ==> check에 따라 하단 전체 선택/해제. ~15:10
+	[]  사과    3000
+	[]  바나나  4000
+	[]  딸기   12000
+	
+	
+	*/
+</script>
+</head>
+<body>
+	<h2></h2>
+	<button id="allunCheck">전체해제</button>
+	<button id="allCheck">전체선택</button><br>
+	사과<input type="checkbox" name="apple" checked="checked"><br>
+	바나나<input type="checkbox" name="banana" checked="checked"><br>
+	오렌지<input type="checkbox" name="orange" checked="checked"><br>
+	
+	
+		
+</body>

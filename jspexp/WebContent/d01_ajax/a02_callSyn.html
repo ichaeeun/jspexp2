@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("동기 통신(화면 refresh없는)");
+		$("h2").click(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","z02_data02.html",false);
+			xhr.send();
+			$("div").html(xhr.responseText);	
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<div></div>
+</body>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+*/
+//
+	var xhr = new XMLHttpRequest();
+	$(document).ready(function(){
+		$("[name=id], [name=name]").keyup(function(){
+			if(event.keyCode==13){
+				ajaxFun()
+			}
+		});
+		$("[name=ckId]").keyup(function(){
+			if(event.keyCode==13){
+				var ckId = $(this).val();
+				if(ckId.length<4||ckId.length>16){
+					$("span").text("아이디는 4~16자입력");					
+					$("span").css("color","red");
+				}else{
+					ajaxFun2(ckId);
+				}
+			}
+		});
+	});
+	function ajaxFun2(idV){		
+		var qstr = "id="+idV;
+		xhr.open("get","z11_memberCk.jsp?"+qstr,true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				// {"hasMember":true} 
+				//alert(xhr.responseText);
+				// 객체형 문자열형식을 객체화하여 처리.
+				var ckId = eval('('+xhr.responseText+')');
+				if(ckId.hasMember){
+					$("span").text("등록된 아이디");
+					$("span").css("color","red");
+					$("[name=ckId]").focus();
+				}else{
+					$("span").text("등록가능 아이디");
+					$("span").css("color","blue");
+				}
+			}
+		};
+		xhr.send();		
+		
+	}		
+	function ajaxFun(){
+		
+		var idV = $("[name=id]").val();
+		var nameV = $("[name=name]").val();
+		var qstr = "id="+idV+"&name="+nameV;
+		xhr.open("get","z10_memberList.jsp?"+qstr,true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				$("div").html(xhr.responseText);				
+			}
+		};
+		xhr.send();		
+	}	
+
+</script>
+</head>
+<body>
+	<h2>회원 등록</h2>
+	<table>
+		<tr><th>회원아이디</th>
+			<td><input name="ckId" size="18"/><span></span></td></tr>
+	</table>
+	<h2>회원 정보 ajax</h2>
+	<table>
+		<tr><th>회원아이디</th><td><input type="text" name="id"/></td></tr>
+		<tr><th>회원명</th><td><input type="text" name="name"/></td></tr>
+	</table>
+	<div></div>
+</body>

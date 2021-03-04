@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("table").hide();
+		$("h2").text("물건정보 로딩").click(function(){
+			console.log("#시작");
+			var xhr = new XMLHttpRequest();
+			xhr.open("get","z06_json.txt",true);
+			xhr.onreadystatechange = function(){
+				if(xhr.readyState==4&&xhr.status==200){
+					//alert(xhr.responseText);
+					var prod = eval("("+xhr.responseText+")");
+					$("td").eq(0).text(prod.name);
+					$("td").eq(1).text(prod.price);
+					$("td").eq(2).text(prod.cnt);
+					// .hide() 보이지 않게 처리, .show() 보이게 처리
+					$("table").show();
+				}
+			};
+			xhr.send();
+			
+		});
+	});
+	function ajaxFun(){
+		var xhr = new XMLHttpRequest();
+		xhr.open("get","",true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				var prod = eval("("+xhr.responseText+")");
+			}
+		};
+		xhr.send();		
+	}
+	
+</script>
+</head>
+<body>
+	<h2></h2>
+	<table>
+		<col width="50%">
+		<tr><th>물건명</th><td></td></tr>
+		<tr><th>가격</th><td></td></tr>
+		<tr><th>갯수</th><td></td></tr>
+	</table>
+</body>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("다중 선택");
+		$("#ckAll").on("click",function(){
+			// $(this).prop("checked") 대상객체의 속성을
+			// boolean값으로 가져오기 때문에 바로 설정해서
+			// 전체 선택/해제가 가능하다..
+			$("input").prop("checked", 
+					$(this).prop("checked") );
+			
+			// ps) 이벤트핸들러 함수에 있는 $(this)는
+			// 이벤트가 일어나는 대상객체를 말한다.
+			// - 이벤트와 대상객체 1:1 $("#아이디")
+			// - 이벤트와 대상객체 1:다 $(".클래스명"), $("태그")로 여러개 일 때
+			//   해당이벤트가 일어난 대상객체를 따로 지정할 필요가 있다. 이 때, $(this)
+			//   를 반드시 해주어야 한다.
+			/*
+			   ex) h4가 여러 개 나열 되어 있을 때, 클릭한 h4만 배경색상을 변경할 때,  
+					$(this)를 활용한다.
+			      $("h4").on("click",function(){
+					$(this).css("background-color","yellow");
+					// $("h4").css("background-color","yellow"); 전체 변경시
+				  });
+			*/
+		});
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<table>
+		<tr><th><input type="checkbox" id="ckAll"/></th>
+			<th>물건명</th><th>가격</th></tr>
+		<tr><td><input type="checkbox"/></td><td>사과</td><td>3000</td></tr>	
+		<tr><td><input type="checkbox"/></td><td>바나나</td><td>4000</td></tr>	
+		<tr><td><input type="checkbox"/></td><td>딸기</td><td>12000</td></tr>	
+	</table>
+</body>

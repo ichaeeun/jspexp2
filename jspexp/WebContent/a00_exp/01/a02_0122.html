@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	td{text-align:center;}
+</style>
+<script type="text/javascript">
+/* 
+[중] 1. 주사위를 던지고(숫자 text로 출력), 나온 수 만큼 말이 움직이게 처리하세요.(5X5테이블에서)
+[상] 2. 주사위를 던지고(이미지6개가 0.1초마다 돌아가다가 3초에 멈추기), 
+		나온 수 만큼 말이 움직이게 처리하세요.(5X5테이블에서)
+[중] 3. 4X5에서 상단에 출력되고 하단에 숫자 0~9까지 구성되고 4칙연산과 = 이 포함되어 있을 때,
+	숫자를 누를때 마다, 합쳐진 최상단 셀에 표시되고 =을 클릭시, 계산결과가 처리되는 
+		일반 계산기를 만드세요.
+[하] 4. 화살표 함수의 형식과 물건갯수과 가격을 처리하는 화살표함수를 처리하세요. 
+		const 함수명 = (매개변수1, 매개변수2...)=>리턴할결과값;
+		함수명(데이터1, 데이터2...);
+ 
+*/
+	const buy = (cnt, price) => cnt*price;
+	var rs = buy(3000,2);
+	alert("결과값:"+rs);
+//
+	var show="";
+	function addC(obj){
+		var txt = obj.innerHTML;
+		show+=txt;
+		document.querySelector("#cshow").innerHTML=show;
+	}
+	function calcu(){		
+		var result = eval(show);
+		show=result;
+		document.querySelector("#cshow").innerHTML=result;
+	}
+</script>
+</head>
+<body>
+	<h2></h2>
+	<h3 onclick="game1()">게임1 시작</h3>
+	<table width="300" height="300" id="tab1" border>
+		<col width="20%"><col width="20%"><col width="20%">
+		<col width="20%"><col width="20%">
+		<tr><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td></tr>
+		<tr><td></td><td></td><td></td><td></td><td></td></tr>
+	</table>
+	<h3 onclick="game2()">게임2 시작</h3>
+	<table width="300" height="300" id="tab2" border>
+		<col width="20%"><col width="20%"><col width="20%">
+		<col width="20%"><col width="20%">
+		<tr><td id="p9"></td><td id="p10"></td><td id="p11"></td><td id="p12"></td><td id="p13"></td></tr>
+		<tr><td id="p8"></td>
+			<td colspan="3" rowspan="3">
+			<img src="r1.PNG" width="100px" height="100px"/>
+			</td><td id="p14"></td></tr>
+		<tr><td id="p7"></td><td id="p15"></td></tr>
+		<tr><td id="p6"></td><td id="p16"></td></tr>
+		<tr><td id="p5"></td><td id="p4"></td><td  id="p3"></td><td id="p2"></td><td id="p1"></td></tr>
+	</table>
+	<h2>계산기</h2>
+	<table width="300" height="300" border>
+		<col width="25%"><col width="25%">
+		<col width="25%"><col width="25%">
+		<tr><td id="cshow" colspan="4" 
+				style="padding:5px;text-align:right">0</td></tr>
+		<tr><td onclick="addC(this)">7</td>
+			<td onclick="addC(this)">8</td>
+			<td onclick="addC(this)">9</td>
+			<td onclick="addC(this)">+</td></tr>
+		<tr><td onclick="addC(this)">4</td>
+			<td onclick="addC(this)">5</td>
+			<td onclick="addC(this)">6</td>
+			<td onclick="addC(this)">-</td></tr>
+		<tr><td onclick="addC(this)">1</td>
+			<td onclick="addC(this)">2</td>
+			<td onclick="addC(this)">3</td>
+			<td onclick="addC(this)">*</td></tr>
+		<tr><td onclick="addC(this)">.</td>
+			<td onclick="addC(this)">0</td>
+			<td onclick="calcu()">=</td>
+			<td onclick="addC(this)">/</td></tr>
+	</table>	
+</body>
+<script type="text/javascript">
+/* 
+*/
+	document.querySelector("h2").innerHTML="즐거운 과제!^^";
+// [중] 1. 주사위를 던지고(숫자 text로 출력), 나온 수 만큼 말이 움직이게 처리하세요.(5X5테이블에서)
+	var tds = document.querySelectorAll("#tab1 td");
+	tds.forEach(function(ele,idx,arr){
+		ele.innerHTML=(idx+1);
+	});
+	var pos=0;//말의 현재 위치.
+	function game1(){
+		// 기존의 내용을 지우고, 추가된 내용처리.
+		tds[pos].style.backgroundColor="white";
+		//  Math.floor() : 실수형을 내림처리로 정수형 만들어준다.
+		//  Math.random()*경우의수 + 시작수
+		var ranNum = Math.floor(Math.random()*6+1);
+		alert("나온 주사위 번호:"+ranNum);
+		if(pos==0){
+			pos+=ranNum-1;
+		}else{
+			pos+=ranNum;
+		}
+		// 1) 말의 위치를 클릭시 마다 증가하게 처리.
+		// 2) 주사위 번호의 수와 0부터 시작하는 td의 차이는 -1로 처리.
+		tds[pos].style.backgroundColor="yellow";
+	}
+	for(var cnt=1;cnt<=16;cnt++){
+		document.querySelector("#p"+cnt).innerHTML=cnt;
+	}
+	// 말의 위치 번호.
+	var posNum = 0;	
+	function game2(){
+		// 이미지 파일 r1.PNG ~ r6.PNG
+		// 해당이미지
+		var imgObj = document.querySelector("img");
+		// 화면에 보일 이미지.
+		var imgIdx=0;
+		var set1 = setInterval(function(){
+			// 이미지를 0.1마다 교체처리.
+			// r[1~6].PNG
+			// ((imgIdx++%6)+1)  
+			// %6은 0~5반복 처리
+			// +1  시작수를 1~6으로 처리..
+			imgObj.src="r"+((imgIdx++%6)+1)+".PNG";
+			// 해당하는 DOM객체의 속성 src로 이미지파일의 파일명으로 동적으로 
+			// 할당 처리한다.
+		},100);		
+		var ranNum = Math.floor(Math.random()*6+1);
+		// 3초후에 임의의 주사위 번호 선택..
+		var set2 = setTimeout(function(){
+			clearInterval(set1); // 반복수행하는 것 중지..
+			// 임의의 주사위 번호로 선택 처리.
+
+			imgObj.src="r"+ranNum+".PNG";
+			// 3초후에 주사위의 배경색상 변경 처리.
+			// 이전 위치의 배경색상은 초기화 
+			// 초기의 id값이 p1부터 시작하기에 초기 설정.
+			document.querySelector("#p"+(posNum==0?1:posNum)).style.backgroundColor="white";
+			// 임의 발생한 숫자와 증가처리..
+			
+			posNum+=ranNum;	
+			if(posNum>16){
+				alert("게임 끝!!");
+				posNum=0;
+			}else{		
+				document.querySelector("#p"+posNum).style.backgroundColor="yellow";
+			}
+		
+			clearTimeout(set2); // 메모리해제..
+		},3000);
+		
+		
+	}
+
+
+
+</script>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("[type=button]").click(function(){
+			ajaxFun();
+		});
+	});
+	function ajaxFun(){
+		var xhr = new XMLHttpRequest();
+		var nameV = $("#name").val();
+		var priceV = $("#price").val();
+		var cntV = $("#cnt").val();
+		xhr.open("get","z08_data.jsp?name="+nameV+"&price="
+						+priceV+"&cnt="+cntV,true);
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState==4&&xhr.status==200){
+				//alert(xhr.responseText);
+				$("div").html(xhr.responseText);				
+			}
+		};
+		xhr.send();		
+	}		
+</script>
+</head>
+<body>
+	<h3>물건구매 비동기 통신</h3>
+	<table>
+		<tr><th>물건명</th><td><input type="text" id="name"/></td></tr>
+		<tr><th>가격</th><td><input type="text" id="price"/></td></tr>
+		<tr><th>갯수</th><td><input type="text" id="cnt"/></td></tr>
+		<tr><td colspan="2"><input type="button" value="구매"/></td></tr>
+	</table>
+	<div></div>
+</body>

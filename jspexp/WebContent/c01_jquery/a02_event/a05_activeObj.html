@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# 동적추가에 대한 이벤트 처리.
+1. 현재 화면에 없지만 앞으로 요소객체에 대한 이벤트로 생성되는 이벤트는 
+	상위 객체의 이벤트와 하위 속성으로 선언하여 처리한다.
+	$("생성될 객체의 상위객체").on("이벤트명","생성될 객체",function(){
+		처리할 이벤트 선언..
+	});
+	1) 생성될 객체의 상위객체:현재 화면에 있는 요소객체
+*/
+	$(document).ready(function(){
+
+		//$("button").click(function(){ alert("안녕!!")});
+		$("#create").on("click",function(){
+			$("div").html("<button id='newButton'>ok</button>");
+	    });
+		// 미래에 동적으로 추가된 요소에 이벤트 처리
+		$("body").on("click","#newButton" , function(event){
+			alert("추가 버튼 이벤트 처리");
+			console.log("click");
+		});	
+		var cnt=1;
+		$("h2").text("동적요소객체 생성").click(function(){
+			$("div").append("<h3>"+(cnt++)+"번째 안녕하세요</h3>");
+		});		
+		// div에서 앞으로 생성될 하위 h3를 클릭시, 
+		$("div").on("click","h3",function(){
+			// $(this) : 클릭한 h3의 배경 색상을 변경 처리
+			$(this).css("background-color","yellow");
+		});
+		// ex) h2를 클릭시, 하단 div 에  h3로 numbering이 된 1번째 안녕하세요 
+		// 계속 추가적(.append()활용)으로 처리되게 하고, 
+		// 해당 h3를 클릭시, 배경색이 노랑색으로 변경하게 처리하세요.
+		// ~14:10	
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<button id="create">new</button>
+	<div></div>
+</body>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+/* 
+[js]
+[하] 1. json객체의 메서드 속성에 대하여 기술하세요.
+		var job = {속성1:속성값, 속성2:function(){}}
+		속성1은 일반 데이터,
+		속성2는 기능 함수로 객체 안에 기능함수는 메서드로 활용된다.
+		
+[하] 2. json형식으로 좋아하는 연예인 이름 분야 나이, showConsole(), 
+ showTable() 로 해서 console에 출력하는 것과 화면 DOM에 테이블로 출력하는 것을 처리하세요. 
+*/
+</script>
+</head>
+<body>
+	<h2></h2>
+	<table border></table>
+</body>
+<script type="text/javascript">
+	document.querySelector("h2").innerHTML="json 연습^^";
+	var enter = {name:"박나래",part:"희극배우",age:35,
+			showConsole:function(){
+				console.log("#좋아하는 연예인#");
+				console.log("이름:"+this.name);
+				console.log("분야:"+this.part);
+				console.log("나이:"+this.age);
+			},
+			showTable:function(){
+				var tabObj = document.querySelector("table");
+				var show = "<tr><th>이름</th><td>"+this.name+"</td><tr>";
+				show += "<tr><th>분야</th><td>"+this.part+"</td><tr>";
+				show += "<tr><th>나이</th><td>"+this.age+"</td><tr>";
+				tabObj.innerHTML += show;
+			}
+	}; // new 객체();
+	enter.showConsole();
+	enter.showTable();
+	
+	
+	
+//
+
+</script>

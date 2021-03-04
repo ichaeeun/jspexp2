@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+# 한번만 처리하는 이벤트 :현재 화면 기준 
+	$("선택자").one("이벤트",함수);
+# 이벤트 강제 처리..
+	$("선택자").trigger("이벤트명");
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("한번만/강제이벤트");
+		$("#pressMe").one("click",function(){
+			console.log("단 한번만 이벤트 실행");
+			alert("좋아요??");
+			
+	     });	
+	    $( "#foo" ).on( "click", function() {
+			 console.log( $( this ).text() );
+			 $('div#show2').append("<h4>"+$( this ).text()+"</h4>");  
+		});
+		setInterval(function(){
+			$( "#foo" ).trigger( "click" );		
+		},3000);    
+		// ex1) 좋아요/싫어요 버튼을 만들고, 둘중에 한번 클릭하면(하단에 표기), 
+		//    더이상 클릭되지 않게 처리 하세요..
+		$("#favor").one("click","button",function(){
+			$("div#show").html($(this).text());
+		});
+		// ex2) 종료 버튼을 만들고, 클릭시, 완료라고 되게 처리하고,
+		//     10초가 지나도 똑같이 완료라고 처리되게 하세요.
+		$("#end").one("click",function(){
+			alert("종료!!");
+		});
+		setTimeout(function(){
+			$("#end").trigger("click");
+		},10000);
+	});
+</script>
+</head>
+<body>
+	<h2></h2>
+	<button id="pressMe">Press Me</button>
+	<button id="foo">press</button><br>
+	<div id="favor">
+		<button>좋아요</button>
+		<button>싫어요</button>
+	</div>
+	<button id="end">종료</button>
+	<div id="show"></div>
+	<div id="show2"></div>
+</body>
