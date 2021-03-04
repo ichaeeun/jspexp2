@@ -36,6 +36,8 @@
 			// .children() : 바로 밑 하위 td들을 지정.
 			// .eq(0): tr하위 td의 첫번째.
 			var empno = $(this).children().eq(0).text();
+			// alert(empno); // 요청값 넘길 시, 반드시 확인 
+			// "${path}/컨트롤러uri이름?요청key="+요청값;
 			location.href="${path}/empDetail.do?empno="+empno;
 		});
 	});

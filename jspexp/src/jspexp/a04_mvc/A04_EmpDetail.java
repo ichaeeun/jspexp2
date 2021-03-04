@@ -35,11 +35,21 @@ public class A04_EmpDetail extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		//1. 요청값 처리
 		// 	1)기본 조회
+		// # 상세화면에서 수정/삭제 프로세스를 구분하기 위하여 처리 
 		String proc = request.getParameter("proc");
 		
 		String empnoS = request.getParameter("empno");
+		// 숫자형 데이터에 대한 처리(에러 및 예외 처리) 
 		if(empnoS==null) empnoS="0";
-		int empno = Integer.parseInt(empnoS);
+		int empno = 0; 
+		// 숫자형을 입력하지 않더라도 에러로 수행을 정지시키는 것을 막을 수 있다. 
+		// 문자열형으로 입력하면 empno를 0으로 처리 
+		try {
+			empno = Integer.parseInt(empnoS);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		//2. 모델 처리
 		A01_Dao dao = new A01_Dao();
 		if(proc!=null) {
@@ -62,6 +72,7 @@ public class A04_EmpDetail extends HttpServlet {
 				dao.deleteEmp(empno);				
 			}
 		}
+		// 수정 후에 상세 내용을 확인할 수 있도록 하단에 위치시킨다. 
 		request.setAttribute("emp", dao.getEmp(empno));
 		
 		
