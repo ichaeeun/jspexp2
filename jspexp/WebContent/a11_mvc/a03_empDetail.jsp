@@ -97,9 +97,7 @@ js코드와 java 코드에 대한 처리는 순서를 생각하면서 처리하�
 			<input type="button" value="삭제" id="delBtn"/>
 			<input type="button" value="메인페이지이동" 
 				onclick="location.href='${path}/emp.do'"/>
-		
 		</td></tr>
-		
 	</table>
 	</form>
 </body>

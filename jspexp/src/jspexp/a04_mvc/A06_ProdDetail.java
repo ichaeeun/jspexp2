@@ -31,15 +31,49 @@ public class A06_ProdDetail extends HttpServlet {
 	/**
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
+    private int paramInt(String s) {
+    	int ret = 0; 
+    	try {
+    		ret = Integer.parseInt(s);
+    	}catch(Exception e) {
+    		System.out.println(e.getMessage());
+    	}
+    	return ret;
+    }
+    
+    private String paramStr(String s) {
+        String ret="";
+        if(s!=null) ret=s;
+        return ret;
+     }
+    
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		// 1. 요청값 
 		request.setCharacterEncoding("utf-8");
 		String pnoS = request.getParameter("pno");
 		String proc = request.getParameter("proc");
-		if(pnoS==null) pnoS="0";
-		int pno = Integer.parseInt(pnoS);
+//		if(pnoS==null) pnoS="0";
+//		int pno = Integer.parseInt(pnoS);
+		int pno = paramInt(pnoS); // null이나 문자열 형태도 0으로 리턴처리 된다. 
+		// 2. 모델데이터 
 		A03_ShopDao dao = new A03_ShopDao();
 		if(proc!=null) {
+			if(proc.equals("ins")) {
+				
+				dao.insertProduct(new Product2(pno,
+										paramStr(request.getParameter("name")),
+										paramInt(request.getParameter("price")),	
+										paramInt(request.getParameter("cnt")),	
+										paramStr(request.getParameter("credteS")),
+										paramStr(request.getParameter("company")),
+										paramStr(request.getParameter("incomedteS")),
+										paramStr(request.getParameter("inmanager"))
+									));
+				pno = dao.getMaxPno();
+				
+			}
+			
 			if(proc.equals("upt")) {
 				String name = request.getParameter("name");
 				String priceS = request.getParameter("price");
@@ -61,11 +95,12 @@ public class A06_ProdDetail extends HttpServlet {
 				System.out.println("삭제 준비 완료:"+pno);
 				dao.deleteProduct(pno);
 			}
+			
 		}
 		
 		request.setAttribute("prod", dao.getProd(pno));
 		
-		
+		// 3. 화면 
 		String page = "/a00_exp/03/a37_0303proDetail.jsp";
 		RequestDispatcher rd = request.getRequestDispatcher(page);
 		rd.forward(request, response);

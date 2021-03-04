@@ -17,7 +17,7 @@
 <style>
 	body {
 		background-image : 
-		url('<%=path%>/a04_exception/img02.jpg');
+		url('<%=path%>/a04_exception/pi05.jpg');
 		background-repeat : no-repeat;
 		background-size : cover;
 		color:yellow;

@@ -156,6 +156,8 @@ SELECT * FROM product2 WHERE pno = 10000;
 	-- 상세 sql	
 	SELECT * FROM product2 WHERE pno = 10000; 
 	 */	
+	
+	
 		//	- 등록 메서드 
 		public void updateProduct( Product2 upt) {
 			try {
@@ -209,7 +211,8 @@ SELECT * FROM product2 WHERE pno = 10000;
 		-- 상세 sql	
 		SELECT * FROM product2 WHERE pno = 10000; 
 		 */	
-			//	- 등록 메서드 
+		
+		// DELETE FROM PRODUCT2 WHERE pno=?
 			public void deleteProduct( int pno) {
 				try {
 					setCon();
@@ -237,7 +240,33 @@ SELECT * FROM product2 WHERE pno = 10000;
 					System.out.println("일반 에러:"+e.getMessage());
 				}	
 			}
-	// DELETE FROM PRODUCT2 WHERE pno=?
+			
+		// SELECT max(PNO) FROM product2
+		public int getMaxPno() {
+				int pno=0;
+				try {
+					setCon();
+					String sql = "SELECT max(PNO) FROM product2";
+					System.out.println("최근 pno가져오기");
+					System.out.println(sql);
+					stmt = con.createStatement();
+					rs = stmt.executeQuery(sql);
+					if(rs.next()) {
+						pno = rs.getInt(1);
+					}
+					rs.close();
+					stmt.close();
+					con.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					System.out.println("상세 조회 에러:"+e.getMessage());
+				} catch( Exception e) {
+					System.out.println("일반 예외:"+e.getMessage());
+				}		
+				return pno;
+		}
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		A03_ShopDao dao = new A03_ShopDao();

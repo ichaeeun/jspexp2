@@ -30,6 +30,13 @@
 			var pno =  $(this).children().eq(0).text();
 			location.href="${path}/prodDetail.do?pno="+pno;
 		});
+		
+		$("#regBtn").on("click",function(){
+			if(confirm("등록하러 갈까요?")){
+				$("form").attr("action","${path}/prodDetail.do");
+				$("form").submit();
+			}
+		});
 	});
 </script>
 </head>
@@ -43,6 +50,7 @@
 	요청값을 전송한다.
 	 --%>
 	<form method="post">
+	<input type="hidden" name="proc" value="insFrm"/>
 	<table>
 		<tr><th>물건명</th><td><input type="text" name="name"  
 			value="${param.name }"/></td></tr>
@@ -53,12 +61,16 @@
 			<input  name="to_price" 
 				value="${param.to_price }" />
 			</td></tr>
-		<tr><td colspan="2"><input type="submit" value="조회"/></td></tr>		
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="조회"/>
+				<input type="button" value="등록" id="regBtn"/>
+			</td></tr>		
 	</table>
 	</form>
 	<table>
 		<tr><th>번호</th><th>물건명</th><th>가격</th><th>갯수</th>
-		<th>등록일</th><th>생산지(회사)</th><th>최근입고일</th><th>입고담당자</th><td></tr>
+		<th>등록일</th><th>생산지(회사)</th><th>최근입고일</th><th>입고담당자</th></tr>
 		<c:forEach var="prod" items="${plist}">
 		<tr class="data">
 			<td>${prod.pno}</td>

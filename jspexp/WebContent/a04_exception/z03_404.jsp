@@ -17,7 +17,7 @@
 <style>
 	body {
 		background-image : 
-		url('<%=path%>/a04_exception/img01.jpg');
+		url('<%=path%>/a04_exception/pi04.jpg');
 		background-repeat : no-repeat;
 		background-size : cover;
 		color:yellow;
@@ -30,6 +30,6 @@
 </script>
 </head>
 <body>
-	<h3 align="center">요청한 페이지가 없습니다.</h3>
+	<h3 align="center" style="background-color:aliceblue;">요청한 페이지가 없습니다.</h3>
 </body>
 </html>
