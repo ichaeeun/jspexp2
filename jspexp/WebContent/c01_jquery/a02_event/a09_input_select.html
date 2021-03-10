@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ 
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("input select 이벤트");
+		$(":input").select(function(){
+			// 해당 input 내용을 더블 클릭해서 선택이 되었을 때 
+			// 하단에 ...selected가 표현되엇다가 
+			// .fadeOut(사라지는 1/1000초시간) 사라짐 
+			$("div").text(".... selected").show().fadeOut(2000);
+		});
+	});
+
+</script>
+</head>
+<body>
+   <h2></h2>
+   <input type="text" value="아이템1 아이템2"/>
+   <input type="text" value=""/>
+   <div></div>
+</body>

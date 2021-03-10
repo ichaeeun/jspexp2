@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ # change 이벤트
+ 1. 값을 변경할 때, 발생하는 이벤트로, text나 select 요소객체에 주로 활용된다. 
+ 	선택이 변경될 때, 처리할 이벤트에 대하여 기술한다. 
+ 2. select 하위에 option : selected는 특정 option이 선택되어진 것을 
+ 	지칭하는 선택자이다. 
+ 	
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("select 이벤트");
+		$("[name=sweets]").change(function(){
+			$("div").text($("[name=sweets]>option:selected").text());
+		}); 
+		
+		$("#calcu").change(function(){
+			var num01 = $("[name=num01]").val();
+			var num02 = $("[name=num02]").val();
+			var cal = $("#calcu>option:selected").text();
+		//  var cal = $("#cal").val(); 
+			var result = eval(num01+cal+num02);
+			$("h3").text(num01+cal+num02+"="+result);
+		});
+	});
+																	
+</script>
+</head>
+<body>
+    <h2></h2>
+     <select name="sweets">
+   	 <option>초콜릿</option>
+   	 <option>캔디</option>
+   	 <option selected>아이스크림</option>
+   	 <option>쿠키</option>
+   </select>  
+   <div></div> 
+   <!-- 
+   ex) [	][+/-/*/-][	]
+   양옆에 두 숫자를 입력하고, 중간에 연사자 선택 select를 선택했을 때, 
+   선택된 연산자에 따라서, 하단 h3에 연산된 결과를 @@ + @@ = @@ 형식으로 출력하세요 
+    -->
+    <input size="2" name="num01">
+    <select style="width:80px" id="calcu">
+    	<option>+</option>
+    	<option>-</option>
+    	<option>*</option>
+    	<option>/</option>
+    </select>
+    <input size="2" name="num02">
+    <h3></h3>
+</body>
+
+
+
+
+
+
+
+

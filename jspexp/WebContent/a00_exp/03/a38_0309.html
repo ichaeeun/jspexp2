@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/*
+[jquery]
+[하] 1. focus/blur이벤트의 기본 형식을 기술하세요.
+	$(선택자).focus(function(){
+ 		처리할 내용 
+ 	});
+	$(선택자).blur(function(){
+		처리할 내용 
+	});
+[하] 2. [0  ] X [0  ] [정답]  : 왼쪽과 같이 3개의 input창을 만들고 입력할 기존 문자가 없어지고 정답 부분을 클릭시, 왼쪽에 
+    입력된 값을 연산하여 출력처리하세요.
+[중] 3. 아래와 같은 내용에 select를 선택했을 때, 구매 총액이 하단에 표기되게 하세요.
+        사과    3000  [0~10]
+        바나나   4500  [0~10]
+        딸기   12000  [0~10]
+          구매 총액  @@@
+[하] 4. 3X3테이블을 만들고, 초기에 중앙에 배경색상으로 노랑색으로 되어 있다가, 키이벤트 좌우상하를 누르고 있을 때는, 중앙에 있는
+    노랑색 배경색상이 해당 방향으로 이동되어 있다가, 키를 떼었을 때, 다시 중앙으로 돌아오게 이벤트 처리하세요.
+*/
+//
+   $(document).ready(function(){
+	   $("#btn").on("click",function(){
+		   var num01 = $("[name=num01]").val();
+		   var num02 = $("[name=num02]").val();
+		   var cal = $("[name=cal]").val();
+		   var result = eval(num01+cal+num02);
+		   $("#result").text(result);
+		   $("[name=num01]").val();
+		   $("[name=num02]").val();
+		   $("[name=cal]").val();
+	   });
+	   $("select").change(function(){
+		   var s01 = $("#s01").val();
+		   var s02 = $("#s02").val();
+		   var s03 = $("#s03").val();
+	//	   alert(s01+s02+s03);
+		   var apple = $("[name=apple]").val();
+		   var banana = $("[name=banana]").val();
+		   var straw = $("[name=straw]").val();
+		   var tot = s01*apple + s02*banana + s03*straw;
+	//	   alert(tot);
+		   $("[name=tot]").val(tot);
+		});
+	   
+	   $("[name=test]").keyup(function(event){
+		   // 좌37 위38 우39 아40 
+		   alert(event.keyCode);
+	   });
+	   $("#5").css("background","tomato");
+	   $("body").keydown(function(event){
+		   $("td").css("background","white");
+		   if(event.keyCode==38){
+			   $("#2").css("background","tomato");
+		   }
+		   if(event.keyCode==37){
+			   $("#4").css("background","tomato");
+		   }
+		   if(event.keyCode==39){
+			   $("#6").css("background","tomato");
+		   }
+		   if(event.keyCode==40){
+			   $("#8").css("background","tomato");
+		   }
+	   });
+	   $("body").keyup(function(event){
+		   $("td").css("background","white");
+		   $("#5").css("background","tomato");
+	   });
+   });
+     
+</script>
+</head>
+<body>
+	<input size="2" name="num01"><input size="2" name="cal"><input size="2" name="num02"><button id="btn">정답</button><span id="result"></span>
+	<br><br><br><br>
+	<table>
+		<tr><th>사과</th><td><input name="apple" value=""></td>
+			<td>
+				<select id="s01">
+					<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option>
+					<option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+				</select></td></tr>
+		<tr><th>바나나</th><td><input name="banana" value=""></td>
+			<td>
+				<select id="s02">
+					<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option>
+					<option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+				</select></td></tr>
+		<tr><th>딸기</th><td><input name="straw" value=""></td>
+			<td><select id="s03">
+					<option>0</option><option>1</option><option>2</option><option>3</option><option>4</option>
+					<option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+				</select></td></tr>
+		<tr><td colspan="3">구매총액 <input name="tot" value="">원</td></tr>
+	</table>
+	
+	<input name="test">
+	<table>
+		<tr><td id="1"></td><td id="2"></td><td id="3"></td></tr>
+		<tr><td id="4"></td><td id="5"></td><td id="6"></td></tr>
+		<tr><td id="7"></td><td id="8"></td><td id="9"></td></tr>
+	</table>
+</body>
+</html>

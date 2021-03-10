@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ # focus 이벤트 
+ 1. 해당 커서를 클릭해서, 해당 대상 객체(input/textarea) 등에 
+ 	위치 시켰을 때, 나타나는 이벤트이다. 
+ 	cf) blur : 커서를 위치시켰다가 다른 곳으로 focus했을 때 이벤트를 수행할 때 사용되는 이벤트이다. 
+ 2. 기본 코드 
+ 	1) 이벤트 선언 	
+ 		$(선택자).focus(function(){
+ 			처리할 내용 
+ 		});
+ 		$(선택자).blur(function(){
+			처리할 내용 
+		});
+ 	2) 이벤트 호출 
+ 		$(선택자).focus();
+ 		$(선택자).blur();
+ 		
+ 		
+ 		
+ 	
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("포커스 이벤트");
+		$("#target").focus(function(){
+			$(this).css("background","yellow");
+		});
+		$("#target").blur(function(){
+			$(this).css("background","blue");
+		});
+		$("#other").on("click",function(){
+			$("#target").focus();
+		});
+		$("#other2").on("click",function(){
+			$("#target").blur();
+		});
+		
+		$("#hi").focus(function(){
+			$(this).val("");
+		});
+		$("#hi").blur(function(){
+			$("h3").text($(this).val());
+		});
+	});
+
+</script>
+</head>
+<body>
+   <h2></h2>
+   <form>
+   		<input id="target" type="text">
+   		<input type="text">
+   </form>
+   <button id="other">focus</button>
+   <button id="other2">blur</button><br>
+   <!--  ex) input창에 입력하세요 문자가 표시됐다가 focus하는 순간 글자가 없어지고 
+   				입력하게 하고, 다른 input에 클릭하는 순간 입력된 글자가 하단 h3에 출력되게 하세요 
+    -->
+    <input id="hi" value="입력하세요"><br>
+    <input id="hi2" value="">
+    <h3></h3>
+</body>
+
+
+
+
+
+
+
+

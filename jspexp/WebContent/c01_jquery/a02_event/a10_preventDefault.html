@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ # event.preventDefault
+ 1. 각 요소객체는 기본적으로 가지고 있는 이벤트가 있다. 
+ (ex) submit() 버튼인 경우 전송을 처리, a 태그인 경우 href속성값 가지고 있는 페이지 이동) 
+ 2. 경우에 따라서는 이러한 기본이벤트를 막을 필요가 있을 때, 사용하는 이벤트 속성처리가 
+ 	event.preventDefault 이다. 
+ 	
+ 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("OK입력하면 '성공' 출력하고 아니면 '실패' 출력");
+		$("#target").submit(function(event){
+			var msg = "실패";
+			if($(":text").val()=='OK'){
+				msg="썽공";
+			}
+			$("div").text(msg);
+			// 넣을 때와 넣지 않았을 때 차이 확인 
+			event.preventDefault();
+		});
+	});
+
+</script>
+</head>
+<body>
+   <h2></h2>
+   <form id="target">
+   		<input type="text" value="">
+   		<input type="submit" value="Go">
+   </form>
+   <div></div>
+</body>
