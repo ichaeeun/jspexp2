@@ -37,6 +37,7 @@
 		$("#target").blur(function(){
 			$(this).css("background","blue");
 		});
+		// 클릭을 통해서, focus이벤트와 동일한 처리를 해준다. 
 		$("#other").on("click",function(){
 			$("#target").focus();
 		});

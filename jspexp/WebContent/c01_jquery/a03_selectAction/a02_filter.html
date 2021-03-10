@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ # filter() 기능 메서드 
+ 1. 매개변수의 문자열 선택자를 통해서, 
+ 	선택자에 대한 filter를 통해서 다시 선택자를 지정하여 처리해준다. 
+ 2. filter 매개변수 옵션 
+ 	1) :even (짝수번쨰), :odd (홀수번째)
+ 		:first, :last, :eq(index) 
+ 	2) css 선택자 
+ 		ex) .orange, #apple 
+ 		클래스 orange인 것과 id값이 apple인 것 선택 
+ 3. filter 함수 처리 
+ 	filter(function(index,단위요소객체){
+ 		return 조건문;
+ 	});
+ 	해당 요소객체 중에, 함수의 boolean값에 해당하는 요소객체를 filter하여 선택하게 한다. 
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("filter()기능메서드");
+		$("#f01>li").filter(":even").css("background","green").end().filter(".orange,#apple").css("font-size","30px");
+		
+		$("#f02>li").filter(function(index,element){
+			return index%3 ==2;
+		}).css("background","orange");
+		// 4*4 테이블에 1~16까지 번호를 붙이고, filter() 기능메서드를 통해서 
+		// 짝수 index 배경 노란색을 처리하고, 홀수 Index 인것은 orange로 처리하세요 (chaining 기능 메서드 활용)
+		$("td").each(function(idx){
+			$(this).text(idx+1);
+		});
+		$("td").filter(function(idx,ele){
+			return (idx+1)%2==0;
+		}).css("background","orange").end().filter(function(idx,ele){
+			return (idx+1)%2==1;
+		}).css("background","pink");
+	});
+
+</script>
+</head>
+<body>
+   <h2></h2>
+   <ul id="f01">
+   	<li>아이템1</li>
+   	<li>아이템2</li>
+   	<li class="orange">아이템3</li>
+   	<li>아이템4</li>
+   	<li id="apple">아이템5</li>
+   	<li>아이템 6</li>
+   </ul>
+   
+   <ul id="f02">
+   	<li>아이템1</li>
+   	<li>아이템2</li>
+   	<li>아이템3</li>
+   	<li>아이템4</li>
+   	<li>아이템5</li>
+   	<li>아이템6</li>
+   </ul>
+   
+<table>
+	<tr><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td></tr>
+	<tr><td></td><td></td><td></td><td></td></tr>
+</table>
+</body>

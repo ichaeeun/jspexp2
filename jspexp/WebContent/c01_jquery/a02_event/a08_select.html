@@ -25,6 +25,18 @@
 		$("#calcu").change(function(){
 			var num01 = $("[name=num01]").val();
 			var num02 = $("[name=num02]").val();
+			/*
+			<select>
+				<option>사과</option>
+				<option>바나나</option>
+				<option>딸기</option>
+			==> $(option:selected").text()와 $("select").val() 가 동일하다. 
+			<select>
+				<option value="c001">사과</option>
+				<option value="c002">바나나</option>
+				<option value="c003">딸기</option>	
+			==> $(option:selected").text()와 $("select").val() 다른 값. 
+			*/
 			var cal = $("#calcu>option:selected").text();
 		//  var cal = $("#cal").val(); 
 			var result = eval(num01+cal+num02);

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/jspexp/a00_com/a00_com.css">
+<script type="text/javascript" src="/jspexp/a00_com/jquery-3.5.1.js"></script>
+<script type="text/javascript">
+/* 
+ # 기능메서드의 chaining 
+ 1. 선택자로 처리된 객체는 기능메서드의 연결에 의해, 누적된 기능을 처리할 수 있다. 
+ 2. 이 때, 기능메서드 가운데 요소객체 선택형인 것이 있으면, 
+ 	선택된 것 중에 다시 기능 메서드가 처리되는 것이다. 
+ 3. .end() 는 앞선 선택자를 무시하고, 다시 처음 선택자로 돌아가서 선택하게 해준다.  
+*/
+//
+	$(document).ready(function(){
+		$("h2").text("chaining and end");
+		$("div").eq(0).text("index #0").end().eq(2).text("index #2");
+		$("h3").eq(0).text("사과").end().eq(1).text("바나나").end().eq(2).text("파인애플").css("background","yellow").end().eq(3).text("딸기").end().eq(4).text("오렌지").css("color","orange");
+	});
+// ex) h3 5개를 나열하여 순번과 mapping하여 과일명을 출력하되 , 
+//		3번째를 선택하여 배경색상을 노란색으로 하고, 
+//		다시, 5번째 선택한 글자색상을 오렌지색으로 처리하세요(1라인으로 명령처리)
+</script>
+</head>
+<style>
+div{
+	width:60px;
+	height:60px;
+	margin:10px;
+	float:left;
+	border:2px solid blue;
+}
+</style>
+<body>
+   <h2></h2>
+   <div></div>
+   <div></div>
+   <div></div>
+   <div></div><br><br><br><br><br><br>
+   <h3></h3>
+   <h3></h3>
+   <h3></h3>
+   <h3></h3>
+   <h3></h3>
+</body>
