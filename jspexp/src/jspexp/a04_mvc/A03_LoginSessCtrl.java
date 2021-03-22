@@ -10,20 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import jspexp.a03_database.A04_MemberDao;
-import jspexp.z01_vo.Member;
-
 /**
  * Servlet implementation class A03_LoginCtrl
  */
 @WebServlet(name = "mvc4.do", urlPatterns = { "/mvc4.do" })
-public class A03_LoginCtrl extends HttpServlet {
+public class A03_LoginSessCtrl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public A03_LoginCtrl() {
+    public A03_LoginSessCtrl() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,14 +46,11 @@ mvc4.do?id=himan&pass=7777로 controller단에 요청값을 넘기고
 		if(pass==null) pass="";
 		String page = "a32_loginFrm.jsp";
 		if(!id.equals("") && !pass.equals("") ) {
-			A04_MemberDao dao = new A04_MemberDao();
-			Member mem = dao.login(new Member(id,pass));
-			
-			if(mem!=null) {
+			if(id.equals("himan") && pass.equals("7777")) {
 				request.setAttribute("isSuccess", true);
 				// DB 연동의 경우, session값을 설정해서 model데이터를 매핑한다.
-				HttpSession session = request.getSession();
-				session.setAttribute("member",mem);
+				// HttpSession session = request.getSession();
+				// session.setAttribute("member", dao.login(id,pass));
 				//a00_exp\02\a32_loginFrm.jsp
 				page="a33_successForm.jsp";
 			}else {

@@ -36,21 +36,11 @@
 </script>
 </head>
 <body>
-	<h3>메인페이지 </h3>
+	<h3>메인페이지(이동된 페이지)-controller없이 </h3>
 	<h4 align="right">${mem.id}로그인 중</h4>
-	<h6>게시판만들기</h6>
-	<form action="insert.do">
-		<!-- 해당 게시물 등록 시 controller에서 다음과 같이 받을 수 있다. 
-			String request.getParameter("writer") -->
-		<!-- 게시물등록 현재로그인한 사람을 작성자로 할 때.. -->
-		<input type="hidden" name="writer" value="${mem.id }"/>
-		제목 : <input name="title">
-		<input type="submit">
-	</form>
 	<h5>세션값 확인</h5>
 	<h5>$mem.pass }</h5>
 	<h5>$mem.name }</h5>
 	<h5>$mem.point }</h5>
-	<a href="a34_main.jsp">페이지 이동</a>
 </body>
 </html>
